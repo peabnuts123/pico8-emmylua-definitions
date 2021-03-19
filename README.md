@@ -2,6 +2,8 @@
 
 [EmmyLua](https://emmylua.github.io/) definitions for the PICO-8 API, for autocomplete/intellisense support in code editors where integration with the [EmmyLua Language Server](https://github.com/EmmyLua/EmmyLua-LanguageServer) is supported ([IntelliJ ](https://github.com/EmmyLua/IntelliJ-EmmyLua), [VSCode](https://github.com/EmmyLua/VSCode-EmmyLua)).
 
+![Recording showing multiple examples of autocomplete in action](https://peabnuts123-public-files.s3.amazonaws.com/pico8-api-demo.gif)
+
 ## Installation
 
 Simply place the file `pico8.lua` somewhere in your workspace, I would recommend a folder called `_pico8` or `_api` or something. You may have to change some settings to reference these definitions as a library, but in my experience simply having them in your workspace is enough.
@@ -20,7 +22,7 @@ If you are using vscode, I would recommend [this extension](https://github.com/s
 
 ## Contributing
 
-Please let me know if there are any incorrect or missing definitions by opening an [issue](pico8-emmylua-definitions/issues) or submitting a [pull request](pico8-emmylua-definitions/pulls).
+Please let me know if there are any incorrect or missing definitions by opening an [issue](https://github.com/peabnuts123/pico8-emmylua-definitions) or submitting a [pull request](https://github.com/peabnuts123/pico8-emmylua-definitions/pulls).
 
 ## Future work
 
