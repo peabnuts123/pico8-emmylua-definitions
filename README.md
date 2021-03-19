@@ -22,7 +22,7 @@ If you are using vscode, I would recommend [this extension](https://github.com/s
 
 ## Contributing
 
-Please let me know if there are any incorrect or missing definitions by opening an [issue](https://github.com/peabnuts123/pico8-emmylua-definitions) or submitting a [pull request](https://github.com/peabnuts123/pico8-emmylua-definitions/pulls).
+Please let me know if there are any incorrect or missing definitions by opening an [issue](https://github.com/peabnuts123/pico8-emmylua-definitions/issues) or submitting a [pull request](https://github.com/peabnuts123/pico8-emmylua-definitions/pulls).
 
 ## Future work
 
