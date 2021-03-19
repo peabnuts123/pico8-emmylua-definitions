@@ -1,6 +1,15 @@
 --- @diagnostic disable:lowercase-global
 
 ----------------------------------------
+--- CREDITS
+----------------------------------------
+-- Created by Peabnuts123 (@peabnuts123)
+-- GitHub: https://github.com/peabnuts123/pico8-emmylua-definitions
+-- No license as PICO-8 is proprietary software.
+-- Please include this credit if you include this in your project 🙂
+-- Feedback and submissions welcome!
+
+----------------------------------------
 --- TYPE DEFINITIONS
 ----------------------------------------
 
