@@ -122,6 +122,7 @@ function cursor(x, y, col) end
 --- API Reference: https://pico-8.fandom.com/wiki/Fget
 --- @param n number The sprite number.
 --- @param f SpriteFlag The flag index (0-7).
+--- @return boolean flag The flag value.
 function fget(n, f) end
 --- Gets the value of all flags of a sprite.
 --- API Reference: https://pico-8.fandom.com/wiki/Fget
@@ -183,7 +184,7 @@ function palt() end
 --- API Reference: https://pico-8.fandom.com/wiki/Pget
 --- @param x number The x coordinate [0-127].
 --- @param y number The y coordinate [0-127].
---- @return Color color The color index of the given pixel
+--- @return Color color The color index of the given pixel.
 function pget(x, y) end
 
 --- Prints a string of characters to the screen.
@@ -287,6 +288,7 @@ function add(tbl, v, i ) end
 --- Returns an iterator for all non-nil items in a sequence in a table, for use with for...in.
 --- API Reference: https://pico-8.fandom.com/wiki/All
 --- @param tbl table The table to iterate.
+--- @return function iterator The iterator.
 function all(tbl) end
 
 --- Deletes the first occurrence of a value from a sequence in a table.
@@ -311,6 +313,7 @@ function foreach(tbl, f) end
 --- Returns an iterator of key-value pairs for all elements in a table, for use with `for...in`.
 --- API Reference: https://pico-8.fandom.com/wiki/Pairs
 --- @param tbl table The table.
+--- @return function iterator The iterator.
 function pairs(tbl) end
 
 
@@ -431,6 +434,7 @@ function memset(dest_addr, val, len) end
 --- API Reference: https://pico-8.fandom.com/wiki/Peek
 --- @param addr number The address of the first memory location.
 --- @param n? number The number of bytes to return. (1 by default, 8192 max.)
+--- @return ... bytes The bytes, one return value per byte.
 function peek(addr, n) end
 
 --- Reads one or more 16-bit values from contiguous groups of two consecutive memory locations.
@@ -438,6 +442,7 @@ function peek(addr, n) end
 --- API Reference: https://pico-8.fandom.com/wiki/Peek2
 --- @param addr number The address of the first memory location.
 --- @param n? number The number of values to return. (1 by default, 8192 max.)
+--- @return ... bytes The bytes, one return value per byte.
 function peek2(addr, n) end
 
 --- Reads one or more 32-bit fixed-point number values from contiguous groups of four consecutive memory locations.
@@ -445,6 +450,7 @@ function peek2(addr, n) end
 --- API Reference: https://pico-8.fandom.com/wiki/Peek4
 --- @param addr number The address of the first memory location.
 --- @param n? number The number of values to return. (1 by default, 8192 max.)
+--- @return ... bytes The bytes, one return value per byte.
 function peek4(addr, n) end
 
 --- Writes one or more bytes to contiguous memory locations.
@@ -488,12 +494,14 @@ function reload() end
 --- Returns the absolute value of a number.
 --- API Reference: https://pico-8.fandom.com/wiki/Abs
 --- @param num number The number.
+--- @return number result The absolute value of `num`.
 function abs(num) end
 
 --- Calculates the arctangent of dy/dx, the angle formed by the vector on the unit circle. The result is adjusted to represent the full circle.
 --- API Reference: https://pico-8.fandom.com/wiki/Atan2
 --- @param dx number The horizontal component.
 --- @param dy number The vertical component.
+--- @return number result The arctangent of `dy/dx`.
 function atan2(dx, dy) end
 
 --- Calculates the bitwise AND of two numbers.
@@ -501,12 +509,14 @@ function atan2(dx, dy) end
 --- API Reference: https://pico-8.fandom.com/wiki/Band
 --- @param a number The first number.
 --- @param b number The second number.
+--- @return number result The bitwise AND of `a` and `b`.
 function band(a, b) end
 
 --- Calculates the bitwise NOT of a number.
 --- You may also use the `~` operator instead of `bnot()`. See API Reference for more details.
 --- API Reference: https://pico-8.fandom.com/wiki/Bnot
 --- @param num number The number.
+--- @return number result The bitwise NOT of `num`.
 function bnot(num) end
 
 --- Calculates the bitwise OR of two numbers.
@@ -514,6 +524,7 @@ function bnot(num) end
 --- API Reference: https://pico-8.fandom.com/wiki/Bor
 --- @param a number The first number.
 --- @param b number The second number.
+--- @return number result The bitwise OR of `a` and `b`.
 function bor(a, b) end
 
 --- Calculates the bitwise XOR (exclusive or) of two numbers.
@@ -521,50 +532,64 @@ function bor(a, b) end
 --- API Reference: https://pico-8.fandom.com/wiki/Bxor
 --- @param a number The first number.
 --- @param b number The second number.
+--- @return number result The bitwise XOR of `a` and `b`.
 function bxor(a, b) end
 
 --- Calculates the cosine of an angle.
 --- NOTE: PICO-8 measures the angle in a CLOCKWISE direction on the Cartesian plane. See API Reference for more details.
 --- API Reference: https://pico-8.fandom.com/wiki/Cos
 --- @param angle number The angle, using a full circle range of 0.0-1.0 measured clockwise (0.0 to the right).
+--- @return number result The cosine of angle `angle`.
 function cos(angle) end
+
+--- Returns the next highest integer (the "ceiling") of a number.
+--- @param num number The number.
+--- @return number result The ceil of `num`.
+function ceil(num) end
 
 --- Returns the integer portion (the "floor") of a number.
 --- API Reference: https://pico-8.fandom.com/wiki/Flr
 --- @param num number The number.
+--- @return number result The floor of `num`.
 function flr(num) end
 
 --- Returns the maximum of two numbers.
 --- API Reference: https://pico-8.fandom.com/wiki/Max
---- @param first number The first number.
---- @param second? number The second number. (default 0)
-function max(first, second) end
+--- @param a number The first number.
+--- @param b? number The second number. (default 0)
+--- @return number result The max of `a` and `b`.
+function max(a, b) end
 
 --- Returns the middle of three numbers. Also useful for clamping.
 --- @param a number The first number.
 --- @param b number The second number.
 --- @param c number The third number.
+--- @return number result The middle number of `a`, `b`, and `c`.
 function mid(a, b, c) end
 
 --- Returns the minimum of two numbers.
 --- @param a number The first number.
 --- @param b? number The second number. (default 0)
+--- @return number result The smaller of `a` and `b`.
 function min(a, b) end
 
 --- Generates a random number between 0 and the given maximum exclusive.
 --- API Reference: https://pico-8.fandom.com/wiki/Rnd
 --- @param max? number The range, non-inclusive. Defaults to 1.
+--- @return number random_number The random number.
 function rnd(max) end
 
 --- Returns a random element from a 1-based table sequence.
 --- API Reference: https://pico-8.fandom.com/wiki/Rnd
 --- @param tbl table The table.
+--- @return any random_element The random element of `tbl`.
 function rnd(tbl) end
 
 --- Returns the sign of a number, 1 for positive, -1 for negative.
 --- NOTE: `sgn(0)` will return 1, not 0 as might be common on other platforms.
 --- API Reference: https://pico-8.fandom.com/wiki/Sgn
 --- @param num number The number to determine the sign of.
+--- @return number result The sign of `num` (either -1 or 1).
 function sgn(num) end
 
 --- Shifts the bits of a number to the left.
@@ -572,6 +597,7 @@ function sgn(num) end
 --- API Reference: https://pico-8.fandom.com/wiki/Shl
 --- @param num number The number.
 --- @param bits number The number of bits to shift.
+--- @return number result The result of shifting `num` to the left by `bits` bits.
 function shl(num, bits) end
 
 --- Shifts the bits of a number to the right.
@@ -580,6 +606,7 @@ function shl(num, bits) end
 --- API Reference: https://pico-8.fandom.com/wiki/Shr
 --- @param num number The number.
 --- @param bits number The number of bits to shift.
+--- @return number result The result of shifting `num` to the right (arithmetic) by `bits` bits.
 function shr(num, bits) end
 
 --- Shifts the bits of a number to the right, using logical shift.
@@ -588,17 +615,20 @@ function shr(num, bits) end
 --- API Reference: https://pico-8.fandom.com/wiki/Lshr
 --- @param num number The number.
 --- @param bits number The number of bits to shift.
+--- @return number result The result of shifting `num` to the right (logical) by `bits` bits.
 function lshr(num, bits) end
 
 --- Calculates the sine of an angle.
 --- NOTE: PICO-8 measures the angle in a CLOCKWISE direction on the Cartesian plane. See API Reference for more details.
 --- API Reference: https://pico-8.fandom.com/wiki/Sin
 --- @param angle number The angle, using a full circle range of 0.0-1.0 measured clockwise (0.0 to the right).
+--- @return number result The sine of angle `angle`.
 function sin(angle) end
 
 --- Calculates the square root of a number.
 --- API Reference: https://pico-8.fandom.com/wiki/Sqrt
 --- @param num number The number. Must be positive.
+--- @return number result The sqaure root of `num`.
 function sqrt(num) end
 
 --- Initializes the random number generator with an explicit seed value.
@@ -619,6 +649,7 @@ function cartdata(id) end
 --- Gets a value from persistent cartridge data.
 --- API Reference: https://pico-8.fandom.com/wiki/Dget
 --- @param index number The index of the value, 0 to 63.
+--- @return number value The value.
 function dget(index) end
 
 --- Sets a value in persistent cartridge data.
