@@ -310,11 +310,38 @@ function deli(tbl, i) end
 --- @param f fun(item: T) The function to call. The function should accept an element as its sole argument.
 function foreach(tbl, f) end
 
+--- A stateless iterator of key-value pairs for all elements in a table.
+--- Used internally by `pairs()` and `ipairs()`.
+--- API Reference: https://pico-8.fandom.com/wiki/Next
+--- @param tbl table The table.
+--- @param key? any The current key.
+--- @return function iterator The iterator.
+function next(tbl, key) end
+
+--- Returns an iterator of index-value pairs for all elements in a table, for use with `for...in`.
+--- API Reference: https://pico-8.fandom.com/wiki/IPairs
+--- @param tbl table The table.
+--- @return function iterator The iterator.
+function ipairs(tbl) end
+
+--- Creates a table from the given parameters.
+--- API Reference: https://pico-8.fandom.com/wiki/Pack
+--- @diagnostic disable-next-line: undefined-doc-param Want to document varargs param more than specifying its type with `@vararg`
+--- @param args ... The parameters.
+--- @return table table A table with all parameters stored sequentially into keys [1], [2], etc.
+function pack(...) end
+
 --- Returns an iterator of key-value pairs for all elements in a table, for use with `for...in`.
 --- API Reference: https://pico-8.fandom.com/wiki/Pairs
 --- @param tbl table The table.
 --- @return function iterator The iterator.
 function pairs(tbl) end
+
+--- Returns the elements from the given table as a tuple.
+--- @param tbl table The table to unpack.
+--- @param i? number First index to unpack. Default is 1.
+--- @param j? number Last index to unpack. Default is `#tbl`.
+function unpack(tbl, i, j) end
 
 
 ----------------------------------------
@@ -618,6 +645,22 @@ function shr(num, bits) end
 --- @return number result The result of shifting `num` to the right (logical) by `bits` bits.
 function lshr(num, bits) end
 
+--- Rotates the bits of a number to the right.
+--- You may also use the `>><` operator instead of `rotr()`. See API Reference for more details.
+--- API Reference: https://pico-8.fandom.com/wiki/Rotr
+--- @param num number The number.
+--- @param bits number The number of bits to rotate.
+--- @return number result The result of rotating `num` to the right by `bits` bits.
+function rotr(num, bits) end
+
+--- Rotates the bits of a number to the left.
+--- You may also use the `<<>` operator instead of `rotl()`. See API Reference for more details.
+--- API Reference: https://pico-8.fandom.com/wiki/Rotl
+--- @param num number The number.
+--- @param bits number The number of bits to rotate.
+--- @return number result The result of rotating `num` to the left by `bits` bits.
+function rotl(num, bits) end
+
 --- Calculates the sine of an angle.
 --- NOTE: PICO-8 measures the angle in a CLOCKWISE direction on the Cartesian plane. See API Reference for more details.
 --- API Reference: https://pico-8.fandom.com/wiki/Sin
@@ -712,11 +755,11 @@ function yield() end
 --- VALUES AND OBJECTS
 ----------------------------------------
 
---- Updates the metatable for a table.
---- API Reference: https://pico-8.fandom.com/wiki/Setmetatable
---- @param tbl table The table whose metatable to modify.
---- @param metatbl table The new metatable.
-function setmetatable(tbl, metatbl) end
+--- Gets the character corresponding to an ordinal (numeric) value.
+--- API Reference: https://pico-8.fandom.com/wiki/Chr
+--- @param ord number The ordinal value to be converted to a single-character string.
+--- @return string char The character represented by numeric value `ord`.
+function chr(ord) end
 
 --- Gets the metatable for a table.
 --- API Reference: https://pico-8.fandom.com/wiki/Getmetatable
@@ -724,11 +767,68 @@ function setmetatable(tbl, metatbl) end
 --- @return table metatable The metatable of `tbl`.
 function getmetatable(tbl) end
 
---- Returns the basic type of a given value as a string.
---- API Reference: https://pico-8.fandom.com/wiki/Type
---- @param v any The value whose type to test.
---- @return string type Type of `v` as a string e.g. `"number"`
-function type(v) end
+--- Gets the ordinal (numeric) version of a character in a string.
+--- API Reference: https://pico-8.fandom.com/wiki/Ord
+--- @param str string The string whose character is to be converted to an ordinal.
+--- @param index? number The index of the character in the string. Default is 1, the first character.
+--- @return number ord The numeric representation of the character.
+function ord(str, index) end
+
+--- Compare two tables, bypassing metamethods.
+--- API Reference: https://pico-8.fandom.com/wiki/Rawequal
+--- @param tbl1 table A table to compare.
+--- @param tbl2 table Another table to compare.
+--- @return boolean are_equal Whether the two tables are equal, using native equality checks instead of  `__eq`.
+function rawequal(tbl1, tbl2) end
+
+--- Read a table member, bypassing metamethods.
+--- API Reference: https://pico-8.fandom.com/wiki/Rawget
+--- @param tbl table The table whose member to read.
+--- @param member any The member to read.
+--- @return any value Value of the table member, using native lookups intead of `__index` or `__newindex`.
+function rawget(tbl, member) end
+
+--- Get the length of a table, bypassing metamethods
+--- API Reference: https://pico-8.fandom.com/wiki/Rawlen
+--- @param tbl table The table whose length to retrieve.
+--- @return number length The length of the table, using native length checks instead of `__len`.
+function rawlen(tbl) end
+
+--- Write to a table member, bypassing metamethods.
+--- API Reference: https://pico-8.fandom.com/wiki/Rawset
+--- @param tbl table The table whose member to modify.
+--- @param member any The member to modify.
+--- @param value any The member's new value.
+function rawset(tbl, member, value) end
+
+--- Selects from the given parameters.
+--- If index is a number, returns all parameters starting at index `index`.
+--- @param index number Index to return parameters from
+--- @diagnostic disable-next-line: undefined-doc-param Want to document varargs param more than specifying its type with `@vararg`
+--- @param args ... The parameters.
+--- @return ... parameters Parameters passed in, starting from index `index`
+function select( index, ... ) end
+--- Selects from the given parameters.
+--- If index is `#`, returns the number of parameters passed.
+--- @param index string The string `#`
+--- @diagnostic disable-next-line: undefined-doc-param Want to document varargs param more than specifying its type with `@vararg`
+--- @param args ... The parameters.
+--- @return number num_parameters The number of parameters passed in.
+function select( index, ... ) end
+
+--- Updates the metatable for a table.
+--- API Reference: https://pico-8.fandom.com/wiki/Setmetatable
+--- @param tbl table The table whose metatable to modify.
+--- @param metatbl table The new metatable.
+function setmetatable(tbl, metatbl) end
+
+--- Split a string into a table of elements delimited by the given separator (defaults to ",").
+--- API Reference: https://pico-8.fandom.com/wiki/Split
+--- @param str string The string.
+--- @param separator? string The separator (defaults to ",").
+--- @param convert_numbers? boolean When convert_numbers is true, numerical tokens are stored as numbers (defaults to true).
+--- @return table string_parts The parts of the string as a table of elements, after splitting by `delimiter`.
+function split( str, separator, convert_numbers) end
 
 --- Gets the substring of a string.
 --- `from` and `to` indices are inclusive.
@@ -738,19 +838,6 @@ function type(v) end
 --- @param to? number The ending index, counting from 1 at the left, or -1 at the right. (default -1)
 --- @return string substring The substring.
 function sub(str, from, to) end
-
---- Gets the ordinal (numeric) version of a character in a string.
---- API Reference: https://pico-8.fandom.com/wiki/Ord
---- @param str string The string whose character is to be converted to an ordinal.
---- @param index? number The index of the character in the string. Default is 1, the first character.
---- @return number ord The numeric representation of the character.
-function ord(str, index) end
-
---- Gets the character corresponding to an ordinal (numeric) value.
---- API Reference: https://pico-8.fandom.com/wiki/Chr
---- @param ord number The ordinal value to be converted to a single-character string.
---- @return string char The character represented by numeric value `ord`.
-function chr(ord) end
 
 --- Converts a string representation of a decimal, hexadecimal, or binary number to a number value.
 --- API Reference: https://pico-8.fandom.com/wiki/Tonum
@@ -764,6 +851,12 @@ function tonum(str) end
 --- @param usehex? boolean If true, uses 32-bit unsigned fixed point hexadecimal notation for number values. The default is to use concise decimal notation for number values.
 --- @return string string The string representation of `val`.
 function tostr(val, usehex) end
+
+--- Returns the basic type of a given value as a string.
+--- API Reference: https://pico-8.fandom.com/wiki/Type
+--- @param v any The value whose type to test.
+--- @return string type Type of `v` as a string e.g. `"number"`
+function type(v) end
 
 
 ----------------------------------------
@@ -786,6 +879,18 @@ function t() end
 --- SYSTEM
 ----------------------------------------
 
+--- Executes an administrative command from within a program.
+--- API Reference: https://pico-8.fandom.com/wiki/Extcmd
+--- @param cmd string The command name, as a string. See API Reference for possible command names.
+function extcmd(cmd) end
+
+--- Loads a cartridge.
+--- API Reference: https://pico-8.fandom.com/wiki/Load
+--- @param filename string Either the name of the cartridge file, a BBS cart ID in the form "#mycartid123", or "@clip" to load a cartridge from the system clipboard copied from the BBS.
+--- @param breadcrumb? string When called from within a cart with this parameter, this adds an item to the pause menu to return to the original cart.
+--- @param param? string An arbitrary string value that can be accessed by the loaded cart using `stat(6)`.
+function load(filename, breadcrumb, param) end
+
 --- Adds a custom item to the PICO-8 menu.
 --- API Reference: https://pico-8.fandom.com/wiki/Menuitem
 --- @param index number The item index, a number between 1 and 5.
@@ -797,11 +902,10 @@ function menuitem(index, label, callback) end
 --- @param index number The item index, a number between 1 and 5.
 function menuitem(index) end
 
---- Executes an administrative command from within a program.
---- API Reference: https://pico-8.fandom.com/wiki/Extcmd
---- @param cmd string The command name, as a string. See API Reference for possible command names.
-function extcmd(cmd) end
-
+--- Runs the current cartridge from the start of the program.
+--- API Reference: https://pico-8.fandom.com/wiki/Run
+--- @param str? string A "breadcrumb" string, as if passed by a calling cartridge.
+function run(str) end
 
 ----------------------------------------
 --- DEBUGGING
